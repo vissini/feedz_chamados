@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('companies', 'CompanyController');
+Route::resource('channels', 'ChannelController');
+Route::resource('modules', 'ModuleController');
+Route::resource('types', 'TypeController');
+
