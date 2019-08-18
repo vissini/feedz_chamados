@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Editar Empresa')
+@section('title', 'Editar Módulo')
 
 @section('content_header')
-    <h1>Editar Empresa</h1>
+    <h1>Editar Módulo</h1>
 @stop
 @section('content')
     <div class="row">
@@ -13,13 +13,13 @@
               <!-- /.box-header -->
               <!-- form start -->
               @include('_errors')
-              <form role="form" method="POST" action="{{ route('companies.update', ['company'=>$company->id]) }}">
+              <form role="form" method="POST" action="{{ route('modules.update', ['module'=>$module->id]) }}">
                 {{method_field('PUT')}}
-                @include('company._form')
+                @include('module._form')
   
                 <div class="box-footer">
-                  <button type="submit" class="btn btn-primary">Alterar Empresa</button>
-                  <a href="{{ route('companies.index') }}" class="btn btn-default">Cancelar</a>
+                  <button type="submit" class="btn btn-primary">Alterar Módulo</button>
+                  <a href="{{ route('modules.index') }}" class="btn btn-default">Cancelar</a>
                 </div>
               </form>
             </div>

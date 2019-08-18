@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Company;
+use App\Models\Company;
 use App\Http\Requests\CompanyFormRequest;
 
 class CompanyController extends Controller

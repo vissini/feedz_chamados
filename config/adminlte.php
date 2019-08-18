@@ -135,7 +135,7 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Chamados',
-            'url'  => '',
+            'url'  => 'tickets',
             'icon' => 'fas fa-ticket-alt',
         ],
 

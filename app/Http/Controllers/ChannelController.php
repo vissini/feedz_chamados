@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Channel;
+use App\Http\Requests\ChannelFormRequest;
 
 class ChannelController extends Controller
 {
+    private $itensPerPage = 3;
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +16,9 @@ class ChannelController extends Controller
      */
     public function index()
     {
-        //
+        $channels = Channel::paginate($this->itensPerPage);
+
+        return view('channel.index', compact('channels'));
     }
 
     /**
@@ -23,7 +28,8 @@ class ChannelController extends Controller
      */
     public function create()
     {
-        //
+        $channel = new Channel();
+        return view('channel.create', compact('channel'));
     }
 
     /**
@@ -32,20 +38,10 @@ class ChannelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ChannelFormRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $channels = Channel::create($request->all());
+        return redirect()->route('channels.index')->with('success','Canal criado com sucesso!');
     }
 
     /**
@@ -54,9 +50,9 @@ class ChannelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Channel $channel)
     {
-        //
+        return view('channel.edit', compact('channel'));
     }
 
     /**
@@ -66,9 +62,10 @@ class ChannelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ChannelFormRequest $request, Channel $channel)
     {
-        //
+        $channel->update($request->all());
+        return redirect()->route('channels.index')->with('success','Canal alterado com sucesso!');
     }
 
     /**
@@ -77,8 +74,9 @@ class ChannelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Channel $channel)
     {
-        //
+        $channel->delete();
+        return redirect()->route('channels.index')->with('success','Canal deletada com sucesso!');
     }
 }

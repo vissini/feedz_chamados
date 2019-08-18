@@ -25,9 +25,9 @@
                     <td style="width:240px;">
                         <a class='btn btn-warning' href=" {{ route('companies.edit',  ['company'=>$company->id]) }}">Editar</a>
                         <a class='btn btn-danger' href=" {{ route('companies.destroy', ['company'=>$company->id]) }} " 
-                            onclick="event.preventDefault(); if(confirm('Deseja apagar a Empresa')){document.getElementById('form-category-delete-{{ $company->id }}').submit();}"
+                            onclick="event.preventDefault(); if(confirm('Deseja apagar a Empresa')){document.getElementById('form-company-delete-{{ $company->id }}').submit();}"
                         >Deletar</a>
-                        <form id="form-category-delete-{{ $company->id }}" style="display:none" action="{{ route('companies.destroy', ['category'=>$company->id]) }}" method="POST">
+                        <form id="form-company-delete-{{ $company->id }}" style="display:none" action="{{ route('companies.destroy', ['company'=>$company->id]) }}" method="POST">
                             {{ csrf_field() }}
                             {{ method_field('DELETE') }}
                         </form>
@@ -38,4 +38,5 @@
             @endforelse
         </tbody>
     </table>
+    {{ $companies->links() }}
 @stop

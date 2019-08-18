@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Type;
+use App\Http\Requests\TypeFormRequest;
 
 class TypeController extends Controller
 {
+    private $itensPerPage = 3;
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +16,9 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        $types = Type::paginate($this->itensPerPage);
+
+        return view('type.index', compact('types'));
     }
 
     /**
@@ -23,7 +28,8 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $type = new type();
+        return view('type.create', compact('type'));
     }
 
     /**
@@ -32,20 +38,10 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TypeFormRequest $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $types = Type::create($request->all());
+        return redirect()->route('types.index')->with('success','Tipo criado com sucesso!');
     }
 
     /**
@@ -54,9 +50,9 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Type $type)
     {
-        //
+        return view('type.edit', compact('type'));
     }
 
     /**
@@ -66,9 +62,10 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TypeFormRequest $request, Type $type)
     {
-        //
+        $type->update($request->all());
+        return redirect()->route('types.index')->with('success','Tipo alterado com sucesso!');
     }
 
     /**
@@ -77,8 +74,9 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type $type)
     {
-        //
+        $type->delete();
+        return redirect()->route('types.index')->with('success','Tipo deletada com sucesso!');
     }
 }

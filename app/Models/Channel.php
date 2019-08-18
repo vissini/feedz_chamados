@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Channel extends Model
 {
     protected $fillable = ['name'];
 }

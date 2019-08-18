@@ -23,4 +23,6 @@ Route::resource('companies', 'CompanyController');
 Route::resource('channels', 'ChannelController');
 Route::resource('modules', 'ModuleController');
 Route::resource('types', 'TypeController');
+Route::resource('tickets', 'TicketController');
+Route::post('/tickets/close', 'TicketController@close')->name('tickets.close');
 
